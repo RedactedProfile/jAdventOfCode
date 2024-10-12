@@ -50,6 +50,10 @@ public class Main {
             State.Part = scanner.nextLine().trim();
         }
 
-        System.out.printf("We're executing year %s, day %s, and part %s", State.Year, State.Day, State.Part);
+        System.out.printf("We're executing year %s, day %s, and part %s \n\r\n\r", State.Year, State.Day, State.Part);
+
+        new Runner(State.Year, State.Day, State.Part)
+                .resolve()
+                .run();
     }
 }
