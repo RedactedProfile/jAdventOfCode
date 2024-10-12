@@ -14,6 +14,7 @@ public class Main {
                 .defaultHelp(true)
                 .description("AOC2023 Runner");
         argumentParser.addArgument("-v", "--version");
+        argumentParser.addArgument("-y", "--year");
         argumentParser.addArgument("-d", "--day");
         argumentParser.addArgument("-p", "--part");
 
@@ -25,6 +26,9 @@ public class Main {
             System.exit(1);
         }
 
+        if(ns.getString("year") != null) {
+            State.Year = ns.getString("year");
+        }
         if (ns.getString("day") != null) {
             State.Day = ns.getString("day");
         }
@@ -33,6 +37,10 @@ public class Main {
         }
 
         Scanner scanner = new Scanner(System.in);
+        if(State.Year.isBlank()) {
+            System.out.println("Which year? ");
+            State.Year = scanner.nextLine().trim();
+        }
         if(State.Day.isBlank()) {
             System.out.println("Which day? ");
             State.Day = scanner.nextLine().trim();
@@ -42,6 +50,6 @@ public class Main {
             State.Part = scanner.nextLine().trim();
         }
 
-        System.out.printf("We're executing day %s and part %s", State.Day, State.Part);
+        System.out.printf("We're executing year %s, day %s, and part %s", State.Year, State.Day, State.Part);
     }
 }
