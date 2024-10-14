@@ -17,6 +17,7 @@ public class Main {
         argumentParser.addArgument("-y", "--year");
         argumentParser.addArgument("-d", "--day");
         argumentParser.addArgument("-p", "--part");
+        argumentParser.addArgument("-s", "--sample");
 
         Namespace ns = null;
         try {
@@ -35,6 +36,10 @@ public class Main {
         if (ns.getString("part") != null) {
             State.Part = ns.getString("part");
         }
+        if(ns.get("sample") != null && ns.getString("sample").equals("true")) {
+            State.Sample = true;
+        }
+
 
         Scanner scanner = new Scanner(System.in);
         if(State.Year.isBlank()) {
@@ -46,13 +51,14 @@ public class Main {
             State.Day = scanner.nextLine().trim();
         }
         if(State.Part.isBlank()) {
-            System.out.println("Which part? ");
+            System.out.println("Which part? leave blank to run all parts");
             State.Part = scanner.nextLine().trim();
         }
 
+
         System.out.printf("We're executing year %s, day %s, and part %s \n\r\n\r", State.Year, State.Day, State.Part);
 
-        new Runner(State.Year, State.Day, State.Part)
+        new Runner(State.Year, State.Day, State.Part, State.Sample)
                 .resolve()
                 .run();
     }

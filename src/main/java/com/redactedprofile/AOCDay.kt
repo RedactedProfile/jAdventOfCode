@@ -1,9 +1,25 @@
-package com.redactedprofile;
+package com.redactedprofile
 
-interface AOCDay {
+abstract class AOCDay() : IAOCDay {
 
-    val filePath:String;
+    override var useSample: Boolean
+        get() = TODO("Not yet implemented")
+        set(value) {}
 
-    fun easy()
-    fun hard()
+    override var puzzleInputFilePath: String
+        get() = TODO("Not yet implemented")
+        set(value) {}
+
+    override var sampleInputFilePath: String
+        get() = TODO("Not yet implemented")
+        set(value) {}
+
+
+    override fun easy() {
+        TODO("Not yet implemented")
+    }
+
+    override fun hard() {
+        TODO("Not yet implemented")
+    }
 }

@@ -4,4 +4,5 @@ public class State {
     public static String Year = "";
     public static String Day = "";
     public static String Part = "";
+    public static boolean Sample = false;
 }

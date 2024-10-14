@@ -4,12 +4,14 @@ package com.redactedprofile;
 public class Runner {
 
     String year, day, part;
-    AOCDay runnable;
+    Boolean sample;
+    IAOCDay runnable;
 
-    public Runner(String y, String d, String p) {
+    public Runner(String y, String d, String p, Boolean s) {
         year = y;
         day = d;
         part = p;
+        sample = s;
     }
 
     public Runner resolve() {
@@ -23,6 +25,8 @@ public class Runner {
 
     public void run() {
         // start the timer
+        runnable.setUseSample(sample);
+
         if(part.equals("1")) {
             runnable.easy();
         } else if(part.equals("2")) {

@@ -1,15 +1,11 @@
 package com.redactedprofile.Y2024.days;
 
 import com.redactedprofile.AOCDay;
+import com.redactedprofile.IAOCDay;
 import org.jetbrains.annotations.NotNull;
 
-public class Day1 implements AOCDay {
+public class Day1 extends AOCDay {
 
-    @NotNull
-    @Override
-    public String getFilePath() {
-        return "";
-    }
 
     @Override
     public void easy() {
