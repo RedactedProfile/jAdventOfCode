@@ -24,17 +24,32 @@ public class Runner {
     }
 
     public void run() {
+        BenchmarkTools timer = new BenchmarkTools();
         // start the timer
         runnable.setUseSample(sample);
 
         if(part.equals("1")) {
+            timer.start();
             runnable.easy();
+            timer.end();
+            System.out.printf("Easy mode completed in %dms%n", timer.getAsMinutes());
         } else if(part.equals("2")) {
+            timer.start();
             runnable.hard();
+            timer.end();
+            System.out.printf("Hard mode completed in %dms%n", timer.getAsMinutes());
         } else {
-            // run both by default
+            timer.start();
             runnable.easy();
+            timer.end();
+            System.out.printf("Easy mode completed in %fms%n", timer.getAsMilliseconds());
+            timer.start();
             runnable.hard();
+            timer.end();
+            System.out.printf("Hard mode completed in %fms%n", timer.getAsMilliseconds());
+//            // run both by default
+//            runnable.easy();
+//            runnable.hard();
         }
         // end the timer and display the results
     }
