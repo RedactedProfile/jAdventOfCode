@@ -28,28 +28,19 @@ public class Runner {
         // start the timer
         runnable.setUseSample(sample);
 
-        if(part.equals("1")) {
-            timer.start();
-            runnable.easy();
-            timer.end();
-            System.out.printf("Easy mode completed in %dms%n", timer.getAsMinutes());
-        } else if(part.equals("2")) {
-            timer.start();
-            runnable.hard();
-            timer.end();
-            System.out.printf("Hard mode completed in %dms%n", timer.getAsMinutes());
-        } else {
+        boolean runEasy = part.equals("1") || part.trim().isBlank(),
+                runHard = part.equals("2") || part.trim().isBlank();
+
+        if(runEasy) {
             timer.start();
             runnable.easy();
             timer.end();
             System.out.printf("Easy mode completed in %fms%n", timer.getAsMilliseconds());
+        } else if(runHard) {
             timer.start();
             runnable.hard();
             timer.end();
             System.out.printf("Hard mode completed in %fms%n", timer.getAsMilliseconds());
-//            // run both by default
-//            runnable.easy();
-//            runnable.hard();
         }
         // end the timer and display the results
     }
