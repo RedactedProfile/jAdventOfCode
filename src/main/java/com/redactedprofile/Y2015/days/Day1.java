@@ -33,5 +33,15 @@ public class Day1 extends AOCDay {
     @Override
     public void hard() {
         System.out.println("Hard Mode Start");
+
+        AtomicInteger floor = new AtomicInteger(0),
+                      count = new AtomicInteger(0);
+
+        getInputLinesByLine(line -> line.chars().takeWhile(c -> floor.get() >= 0).forEach(c -> {
+            floor.getAndAdd( c == '(' ? 1 : -1);
+            count.getAndIncrement();
+        }));
+
+        System.out.println("Output: " + count.get());
     }
 }
