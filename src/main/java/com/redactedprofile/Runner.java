@@ -1,5 +1,8 @@
 package com.redactedprofile;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+
 /// This class executes registered AOC classes and provides metrics
 public class Runner {
 
@@ -17,9 +20,16 @@ public class Runner {
     public Runner resolve() {
         if(Registry.days.containsKey(year)) {
             if(Registry.days.get(year).containsKey(day)) {
-                runnable = Registry.days.get(year).get(day);
+                try {
+                    Class<? extends IAOCDay> dayClass = Registry.days.get(year).get(day);
+                    assert dayClass != null;
+                    runnable = dayClass.getDeclaredConstructor().newInstance();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
+
         return this;
     }
 
@@ -28,8 +38,8 @@ public class Runner {
         // start the timer
         runnable.setUseSample(sample);
 
-        boolean runEasy = part.equals("1") || part.trim().isBlank(),
-                runHard = part.equals("2") || part.trim().isBlank();
+        boolean runEasy = part.equals("1") || part.equals("all") || part.trim().isBlank(),
+                runHard = part.equals("2") || part.equals("all") || part.trim().isBlank();
 
         if(runEasy) {
             System.out.println("Easy Mode: Start");
