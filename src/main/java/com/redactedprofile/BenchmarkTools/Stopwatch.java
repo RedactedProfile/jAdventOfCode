@@ -39,6 +39,6 @@ public class Stopwatch {
     }
 
     public String message(String label) {
-        return label + String.format(": completed in %dns | %f%n", getFinalTime(), getAsMilliseconds());
+        return label + String.format(": completed in %.2fms%n", getAsMilliseconds());
     }
 }
