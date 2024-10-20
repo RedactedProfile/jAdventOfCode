@@ -3,6 +3,11 @@ package com.redactedprofile.Y2015.days;
 import com.redactedprofile.AOCDay;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class Day1 extends AOCDay {
 
     @NotNull
@@ -20,9 +25,9 @@ public class Day1 extends AOCDay {
     @Override
     public void easy() throws RuntimeException {
         System.out.println("Easy Mode Start");
-        getInputLinesByLine(s -> {
-            System.out.println("Line: " + s);
-        });
+        AtomicInteger floor = new AtomicInteger(0);
+        getInputLinesByLine(line -> line.chars().forEach(c -> floor.getAndAdd( c == '(' ? 1 : -1)));
+        System.out.println("Output: " + floor.get());
     }
 
     @Override
