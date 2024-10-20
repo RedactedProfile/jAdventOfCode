@@ -17,12 +17,7 @@ public class Day2 extends AOCDay {
     }
 
     @Override
-    public String getSampleInputFilePath() {
-        return "2015/02.txt";
-    }
-
-    @Override
-    public void easy() throws RuntimeException {
+    public void easy() {
         getInputLinesByLine(System.out::println);
     }
 

@@ -17,20 +17,14 @@ public class Day1 extends AOCDay {
         return "2015/01.txt";
     }
 
-    @Override
-    public String getSampleInputFilePath() {
-        return "2015/01.txt";
-    }
-
     /**
      * 2015:Day1::easy
      * This part simpy wants to figure out which floor our Santa has landed on after going through
      * all the puzzle input. We simply loop through each character, and either increment or decrement based
      * on which character we're looking at.
-     * @throws RuntimeException
      */
     @Override
-    public void easy() throws RuntimeException {
+    public void easy() {
         AtomicInteger floor = new AtomicInteger(0);
         getInputLinesByLine(line -> line.chars().forEach(c -> floor.getAndAdd( c == '(' ? 1 : -1)));
 
@@ -40,7 +34,6 @@ public class Day1 extends AOCDay {
     /**
      * 2015:Day1::hard
      * This part wants us to figure out which step in the puzzle input gets us into a negative floor value
-     * @throws RuntimeException
      */
     @Override
     public void hard() {
