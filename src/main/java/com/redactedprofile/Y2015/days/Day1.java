@@ -24,16 +24,14 @@ public class Day1 extends AOCDay {
 
     @Override
     public void easy() throws RuntimeException {
-        System.out.println("Easy Mode Start");
         AtomicInteger floor = new AtomicInteger(0);
         getInputLinesByLine(line -> line.chars().forEach(c -> floor.getAndAdd( c == '(' ? 1 : -1)));
+
         System.out.println("Output: " + floor.get());
     }
 
     @Override
     public void hard() {
-        System.out.println("Hard Mode Start");
-
         AtomicInteger floor = new AtomicInteger(0),
                       count = new AtomicInteger(0);
 

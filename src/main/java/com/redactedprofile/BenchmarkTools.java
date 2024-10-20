@@ -27,7 +27,7 @@ public class BenchmarkTools {
     }
 
     public float getAsMilliseconds() {
-        return getFinalTime() / 1000000;
+        return (float)getFinalTime() / 1000000;
     }
 
     public float getAsSeconds() {
@@ -36,5 +36,9 @@ public class BenchmarkTools {
 
     public float getAsMinutes() {
         return getAsSeconds() / 60 ;
+    }
+
+    public String message(String label) {
+        return label + String.format(": completed in %dns | %f%n", getFinalTime(), getAsMilliseconds());
     }
 }

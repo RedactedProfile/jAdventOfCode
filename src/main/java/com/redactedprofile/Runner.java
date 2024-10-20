@@ -32,16 +32,19 @@ public class Runner {
                 runHard = part.equals("2") || part.trim().isBlank();
 
         if(runEasy) {
+            System.out.println("Easy Mode: Start");
             timer.start();
             runnable.easy();
             timer.end();
-            System.out.printf("Easy mode completed in %fms%n", timer.getAsMilliseconds());
-        } else if(runHard) {
+            System.out.println(timer.message("Easy Mode"));
+        }
+
+        if(runHard) {
+            System.out.println("Hard Mode: Start");
             timer.start();
             runnable.hard();
             timer.end();
-            System.out.printf("Hard mode completed in %fms%n", timer.getAsMilliseconds());
+            System.out.println(timer.message("Hard Mode"));
         }
-        // end the timer and display the results
     }
 }
