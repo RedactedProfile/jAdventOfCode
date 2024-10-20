@@ -1,22 +1,18 @@
 package com.redactedprofile.Y2015.days;
 
 import com.redactedprofile.AOCDay;
-import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day1 extends AOCDay {
 
-    @NotNull
+    
     @Override
     public String getPuzzleInputFilePath() {
         return "2015/01.txt";
     }
 
-    @NotNull
+    
     @Override
     public String getSampleInputFilePath() {
         return "2015/01.txt";

@@ -1,7 +1,6 @@
 package com.redactedprofile;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
+import com.redactedprofile.BenchmarkTools.Stopwatch;
 
 /// This class executes registered AOC classes and provides metrics
 public class Runner {
@@ -34,7 +33,7 @@ public class Runner {
     }
 
     public void run() {
-        BenchmarkTools timer = new BenchmarkTools();
+        Stopwatch timer = new Stopwatch();
         // start the timer
         runnable.setUseSample(sample);
 

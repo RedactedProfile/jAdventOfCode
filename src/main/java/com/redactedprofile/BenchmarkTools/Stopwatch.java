@@ -1,8 +1,8 @@
-package com.redactedprofile;
+package com.redactedprofile.BenchmarkTools;
 
 import java.util.Date;
 
-public class BenchmarkTools {
+public class Stopwatch {
 
     private long startTime;
     private Date startDate;

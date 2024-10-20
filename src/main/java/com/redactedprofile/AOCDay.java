@@ -1,7 +1,5 @@
 package com.redactedprofile;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -21,33 +19,35 @@ public class AOCDay implements IAOCDay {
     }
 
     @Override
+    public boolean isUseSample() {
+        return false;
+    }
+
+    @Override
     public void setUseSample(boolean b) {
         this.useSample = b;
     }
 
-    @NotNull
     @Override
     public String getPuzzleInputFilePath() {
         return this.puzzleInputFilePath;
     }
 
     @Override
-    public void setPuzzleInputFilePath(@NotNull String s) {
+    public void setPuzzleInputFilePath(String s) {
         this.puzzleInputFilePath = s;
     }
 
-    @NotNull
     @Override
     public String getSampleInputFilePath() {
         return this.sampleInputFilePath;
     }
 
     @Override
-    public void setSampleInputFilePath(@NotNull String s) {
+    public void setSampleInputFilePath(String s) {
         this.sampleInputFilePath = s;
     }
 
-    @NotNull
     @Override
     public File getInput() {
         String filePath = getPuzzleInputFilePath();
@@ -75,7 +75,7 @@ public class AOCDay implements IAOCDay {
     }
 
     @Override
-    public void getInputLinesByLine(@NotNull Consumer<String> reader) {
+    public void getInputLinesByLine(Consumer<String> reader) {
         try(BufferedReader br = new BufferedReader(new FileReader(getInput()))) {
             String line;
             while((line = br.readLine()) != null) {
