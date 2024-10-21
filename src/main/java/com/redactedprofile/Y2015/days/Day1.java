@@ -28,7 +28,7 @@ public class Day1 extends AOCDay {
         AtomicInteger floor = new AtomicInteger(0);
         getInputLinesByLine(line -> line.chars().forEach(c -> floor.getAndAdd( c == '(' ? 1 : -1)));
 
-        System.out.println("Output: " + floor.get());
+        System.out.println("Final floor: " + floor.get());
     }
 
     /**
@@ -45,6 +45,6 @@ public class Day1 extends AOCDay {
             count.getAndIncrement();
         }));
 
-        System.out.println("Output: " + count.get());
+        System.out.println("First step we go below the surface: " + count.get());
     }
 }
