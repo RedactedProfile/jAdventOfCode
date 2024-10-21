@@ -23,6 +23,17 @@ public class Day3 extends AOCDay {
         return "2015/03.txt";
     }
 
+    @Override
+    public void easy() {
+        Point position = new Point();
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put(position.encode(), 1);
+
+        getInputLinesByLine(line -> navigate(line, (r -> updateMap(r, position, map))));
+
+        System.out.println("Amount of unique houses that got presents is " + map.size());
+    }
+
 
     private void navigate(String directions, Consumer<String> directionCallback) {
         String evaluatedDirection = "";
