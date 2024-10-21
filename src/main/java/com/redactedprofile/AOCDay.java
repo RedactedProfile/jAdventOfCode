@@ -66,12 +66,12 @@ public abstract class AOCDay implements IAOCDay {
 
     @Override
     public void easy() {
-
+        System.out.println("Easy mode not implemented");
     }
 
     @Override
     public void hard() {
-
+        System.out.println("Hard mode not implemented");
     }
 
     @Override
@@ -84,5 +84,10 @@ public abstract class AOCDay implements IAOCDay {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void assertTests() {
+        System.out.println("Tests not implemented. Skipping.");
     }
 }

@@ -29,8 +29,6 @@ public class Day2 extends AOCDay {
      */
     @Override
     public void easy() {
-        assertTests();
-
         AtomicInteger sqft = new AtomicInteger(0);
         getInputLinesByLine(
                 line -> tokenize(line, (
@@ -46,10 +44,7 @@ public class Day2 extends AOCDay {
      */
     @Override
     public void hard() {
-        assertTests();
-
         AtomicInteger footage = new AtomicInteger(0);
-
         getInputLinesByLine(
                 line -> tokenize(line, (
                         tokens -> calculateRibbonLength((int) tokens.get(0), (int) tokens.get(2), (int) tokens.get(4),
@@ -164,7 +159,7 @@ public class Day2 extends AOCDay {
      * These are assertions to make sure all the calculations are arriving to the right values.
      * If something's not right, we break the app.
      */
-    private void assertTests() {
+    public void assertTests() {
         String assert1str = "2x3x4",
                assert2str = "1x1x10";
         List<Object> assert1 = tokenize(assert1str),

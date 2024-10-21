@@ -20,4 +20,5 @@ public interface IAOCDay {
     void easy();
     void hard();
 
+    void assertTests();
 }

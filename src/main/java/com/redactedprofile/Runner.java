@@ -40,6 +40,11 @@ public class Runner {
         boolean runEasy = part.equals("1") || part.equals("all") || part.trim().isBlank(),
                 runHard = part.equals("2") || part.equals("all") || part.trim().isBlank();
 
+        if(runEasy || runHard) {
+            // run assertion suite
+            runnable.assertTests();
+        }
+
         if(runEasy) {
             System.out.println("Easy Mode: Start");
             timer.start();
