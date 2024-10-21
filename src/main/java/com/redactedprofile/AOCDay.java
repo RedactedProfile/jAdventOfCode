@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.function.Consumer;
 
-public class AOCDay implements IAOCDay {
+public abstract class AOCDay implements IAOCDay {
 
     private boolean useSample = false;
     private String puzzleInputFilePath = "noinput.txt";

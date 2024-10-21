@@ -19,6 +19,5 @@ public interface IAOCDay {
     void getInputLinesByLine(Consumer<String> reader);
     void easy();
     void hard();
-    void report(String out);
 
 }
