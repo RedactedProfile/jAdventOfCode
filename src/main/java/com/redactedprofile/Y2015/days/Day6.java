@@ -13,7 +13,7 @@ public class Day6 extends AOCDay {
     static int WIDTH = 1000;
     static int HEIGHT = 1000;
 
-    boolean[] grid;
+    int[] grid;
 
     @Override
     public String getPuzzleInputFilePath() {
@@ -85,19 +85,19 @@ public class Day6 extends AOCDay {
      */
 
     private void initGrid() {
-        grid = new boolean[WIDTH * HEIGHT];
+        grid = new int[WIDTH * HEIGHT];
     }
 
-    private void toggle(int x, int y, boolean state) {
+    private void toggle(int x, int y, int state) {
         grid[y * WIDTH + x] = state;
     }
 
     private void toggle(int x, int y) {
         int point = y * WIDTH + x;
-        grid[point] = !grid[point];
+        grid[point] = grid[point] == 1 ? 0 : 1;
     }
 
-    private void sweepToggle(int x, int y, int x2, int y2, boolean state) {
+    private void sweepToggle(int x, int y, int x2, int y2, int state) {
         for(int r = y; r <= y2; r++) {
             for(int c = x; c <= x2; c++) {
                 toggle(c, r, state);
@@ -117,7 +117,7 @@ public class Day6 extends AOCDay {
         switch (instruction.mode) {
             case "on":
             case "off":
-                sweepToggle(instruction.x, instruction.y, instruction.x2, instruction.y2, instruction.mode.equals("on"));
+                sweepToggle(instruction.x, instruction.y, instruction.x2, instruction.y2, instruction.mode.equals("on") ? 1 : 0);
                 break;
             case "toggle":
                 sweepToggle(instruction.x, instruction.y, instruction.x2, instruction.y2);
@@ -131,8 +131,8 @@ public class Day6 extends AOCDay {
         for(int c = 0; c < WIDTH; c++) {
             for(int r = 0; r < HEIGHT; r++) {
                 int point = r * WIDTH + c;
-                on  += grid[point] ? 1 : 0;
-                off += grid[point] ? 0 : 1;
+                on  += grid[point] == 1 ? 1 : 0;
+                off += grid[point] == 0 ? 1 : 0;
             }
         }
         return new EvaluationResult(on, off);
