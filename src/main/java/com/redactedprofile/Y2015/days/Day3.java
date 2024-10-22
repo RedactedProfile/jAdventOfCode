@@ -1,6 +1,7 @@
 package com.redactedprofile.Y2015.days;
 
 import com.redactedprofile.AOCDay;
+import com.redactedprofile.Shared.Point;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,13 +13,6 @@ import java.util.function.Consumer;
  *
  */
 public class Day3 extends AOCDay {
-
-    class Point {
-        int x = 0, y = 0;
-        public void reset() { x = y = 0; }
-        public String encode() { return x + "," + y; }
-    }
-
 
     @Override
     public String getPuzzleInputFilePath() {
