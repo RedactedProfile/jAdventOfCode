@@ -66,7 +66,6 @@ public class Day6 extends AOCDay {
 
         for (String token : tokens) {
             if(token.matches("([0-9]+),([0-9]+)")) {
-//                System.out.println(token + " is an integer pair");
                 var pair = token.split(",");
                 if(!hasStartPair) {
                     x = Integer.parseInt(pair[0]);
@@ -77,11 +76,9 @@ public class Day6 extends AOCDay {
                     y2 = Integer.parseInt(pair[1]);
                 }
             } else if(token.startsWith("turn")) {
-//                System.out.println(token + " is turning " );
                 var pair = token.split(" ");
                 mode = pair[1];
             } else if(token.startsWith("toggle")) {
-//                System.out.println(token + " is toggling " );
                 mode = "toggle";
             }
         }
