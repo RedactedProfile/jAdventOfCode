@@ -204,8 +204,8 @@ public class Day6 extends AOCDay {
 
         // Test the tokenization features
         String strToken1 = "turn on 0,0 through 999,999",
-                strToken2 = "toggle 0,0 through 999,0",
-                strToken3 = "turn off 499,499 through 500,500";
+               strToken2 = "toggle 0,0 through 999,0",
+               strToken3 = "turn off 499,499 through 500,500";
 
         InstructionRecord tokens1 = tokenize(strToken1),
                           tokens2 = tokenize(strToken2),
