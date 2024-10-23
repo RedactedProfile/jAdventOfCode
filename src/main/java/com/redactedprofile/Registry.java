@@ -8,6 +8,7 @@ public class Registry {
                     Map.entry("1", com.redactedprofile.Y2015.days.Day1.class),
                     Map.entry("2", com.redactedprofile.Y2015.days.Day2.class),
                     Map.entry("3", com.redactedprofile.Y2015.days.Day3.class),
+                    Map.entry("4", com.redactedprofile.Y2015.days.Day4.class),
                     Map.entry("6", com.redactedprofile.Y2015.days.Day6.class)
             )),
             Map.entry("2023", Map.ofEntries(
