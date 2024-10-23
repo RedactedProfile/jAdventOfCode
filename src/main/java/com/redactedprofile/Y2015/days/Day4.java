@@ -15,6 +15,24 @@ public class Day4 extends AOCDay {
     public Day4() throws NoSuchAlgorithmException {
     }
 
+    @Override
+    public void easy() {
+
+        int result = findLeadingPattern("iwrupvqb", "00000");
+
+        System.out.println(result);
+
+    }
+
+    @Override
+    public void hard() {
+
+        int result = findLeadingPattern("iwrupvqb", "000000");
+
+        System.out.println(result);
+
+    }
+
     private String md5(String in) {
         StringBuilder md5Hex =
                 new StringBuilder(
