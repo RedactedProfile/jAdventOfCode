@@ -42,7 +42,11 @@ public class Runner {
 
         if(runEasy || runHard) {
             // run assertion suite
+            System.out.println("Assertion Tests: Start");
+            timer.start();
             runnable.assertTests();
+            timer.end();
+            System.out.println(timer.message("Assertion Tests"));
         }
 
         if(runEasy) {
