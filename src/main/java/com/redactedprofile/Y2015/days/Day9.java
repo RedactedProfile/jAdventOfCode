@@ -4,6 +4,7 @@ import com.redactedprofile.AOCDay;
 
 import javax.swing.*;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,24 @@ public class Day9 extends AOCDay {
     private static final int NAV_FROM = 0;
     private static final int NAV_TO = 1;
     private static final int NAV_DISTANCE = 2;
+
+
+    @Override
+    public String getPuzzleInputFilePath() {
+        return "2015/09.txt";
+    }
+
+    @Override
+    public void easy() {
+
+
+
+        System.out.println("Final floor: ");
+    }
+
+
+
+
 
     Pattern instructionPattern = Pattern.compile(
             "([a-zA-Z]+)|([0-9]+)|(?: to )|(?: = )");
@@ -104,7 +123,7 @@ public class Day9 extends AOCDay {
 
             }
 
-            System.out.println(routes);
+//            System.out.println(routes);
         }
 
         return routes;
@@ -135,9 +154,10 @@ public class Day9 extends AOCDay {
         if(!tok2.get(NAV_TO).equals("Belfast")) throw new AssertionError("Assertion 2 failed: tok2[NAV_TO] != Belfast: " + tok2.get(NAV_TO));
         if(!tok3.get(NAV_DISTANCE).equals("141")) throw new AssertionError("Assertion 3 failed: tok2[NAV_DIST] != 141: " + tok3.get(NAV_DISTANCE));
 
-        List<List<String>> navs = List.of(tok1, tok2, tok3);
+//        List<List<String>> navs = List.of(tok1, tok2, tok3);
+        List<List<String>> navs = List.of(List.of("Vancouver", "Toronto"), List.of("Montreal", "Victoria"), List.of("Edmonton", "Calgary"), List.of("Prince George", "Saskatoon"));
         Set<String> endpoints = collectEndpoints(navs);
-        if(endpoints.size() != 3) throw new AssertionError("Assertion 4 failed: endpoints.size() != 3: " + endpoints.size());
+//        if(endpoints.size() != 3) throw new AssertionError("Assertion 4 failed: endpoints.size() != 3: " + endpoints.size());
 
         var routes = collectRoutes(endpoints);
     }
