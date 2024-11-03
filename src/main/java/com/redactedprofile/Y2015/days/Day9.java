@@ -46,7 +46,17 @@ public class Day9 extends AOCDay {
             ArrayList<String> routeContainer,               // active route being built
             ArrayList<String> endpoints)                          // all available endpoints
     {
+        while(true) { // loop as many times as there are available slots while finding something unique
+            Collections.shuffle(endpoints);
+            ArrayList<String> shuffledEndpoints = new ArrayList<>(endpoints);
+            if(!routes.contains(shuffledEndpoints)) {
+                routes.add(shuffledEndpoints);
+                return true;
+            }
+        }
 
+
+        /**
         int attempts = 0;
         while(attempts < calculateFactor(endpoints.size())) { // loop as many times as there are available slots while finding something to build
             routeContainer.clear();
@@ -76,6 +86,7 @@ public class Day9 extends AOCDay {
 
         // we tried jim. Nothing was found.
         return false; // let us loop again
+         */
     }
 
     ArrayList<ArrayList<String>> collectRoutes(Set<String> endpoints) {
@@ -90,11 +101,10 @@ public class Day9 extends AOCDay {
             ArrayList<String> routeContainer = new ArrayList<>(endpointList.size());
             while(!generateRoute(routes, routeContainer, endpointArray)) {
                 // the functions doing all the work
-                System.out.println(routeContainer);
+
             }
 
-
-            System.out.println(routeContainer);
+            System.out.println(routes);
         }
 
         return routes;
