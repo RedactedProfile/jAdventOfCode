@@ -41,38 +41,40 @@ public class Day9 extends AOCDay {
         return factor;
     }
 
-    String pickNextRoute(List<String> endpoints, Set<String> chosen) {
-        while(true) {
-
-        }
-    }
-
     boolean generateRoute(
             ArrayList<ArrayList<String>> routes,            // global container for all generates routes
             ArrayList<String> routeContainer,               // active route being built
             ArrayList<String> endpoints)                          // all available endpoints
     {
-        Collections.shuffle(endpoints);
-        // Pick the next string
-        boolean foundInRoute = false;
-        for(String endpoint : endpoints) {
-            if(!routeContainer.contains(endpoint)) {
-                foundInRoute = true;
-                routeContainer.add(endpoint);
 
-                generateRoute(routes, routeContainer, endpoints);
-                break;
+        int attempts = 0;
+        while(attempts < calculateFactor(endpoints.size())) { // loop as many times as there are available slots while finding something to build
+            routeContainer.clear();
+            while(routeContainer.size() < endpoints.size()) { // each loop we should be adding one endpoint until completion
+
+                // we have an empty slot to fill. Let's choose one at random
+
+                // first, randomize the array of endpoints
+                Collections.shuffle(endpoints);
+
+                // we're going to now go through the shuffled endpoints one by one until we find one that isn't already in the route container
+                for(String endpoint : endpoints) {
+                    if(!routeContainer.contains(endpoint)) {
+                        routeContainer.add(endpoint);
+                        break;
+                    }
+                }
             }
-        }
 
-        if(!foundInRoute) { // this means we reached the end and there's no more to choose
-            // now check to see if we've already got this one in the global registry
-            if(!routes.contains(routeContainer)) {
+            if(!routes.contains(routeContainer)) { // if this is a fresh entry that doesn't already exist, break out
                 routes.add(routeContainer);
                 return true;
             }
+            attempts++;
         }
 
+
+        // we tried jim. Nothing was found.
         return false; // let us loop again
     }
 
@@ -93,20 +95,6 @@ public class Day9 extends AOCDay {
 
 
             System.out.println(routeContainer);
-
-//            Set<String> route = new HashSet<>(endpoints.size());
-//            for(int j = 0; j < endpointList.size(); j++) {
-//                if(!route.contains(endpointList.get(j))) {
-//                    route.add(endpointList.get(j));
-//                }
-//            }
-//            for (String endpoint : endpoints) {
-//                route.add(endpoint);
-//            }
-
-//            System.out.println("Route: " + route);
-//
-//            routes.add(route);
         }
 
         return routes;
