@@ -93,15 +93,15 @@ public class Day9 extends AOCDay {
         if(!tok2.get(NAV_TO).equals("Belfast")) throw new AssertionError("Assertion 2 failed: tok2[NAV_TO] != Belfast: " + tok2.get(NAV_TO));
         if(!tok3.get(NAV_DISTANCE).equals("141")) throw new AssertionError("Assertion 3 failed: tok2[NAV_DIST] != 141: " + tok3.get(NAV_DISTANCE));
 
-//        List<List<String>> navs = List.of(tok1, tok2, tok3);
-        List<List<String>> navs = List.of(List.of("Vancouver", "Toronto"), List.of("Montreal", "Victoria"), List.of("Edmonton", "Calgary"), List.of("Prince George", "Saskatoon"));
+        List<List<String>> navs = List.of(tok1, tok2, tok3);
         Set<String> endpoints = collectEndpoints(navs);
-//        if(endpoints.size() != 3) throw new AssertionError("Assertion 4 failed: endpoints.size() != 3: " + endpoints.size());
+        if(endpoints.size() != 3) throw new AssertionError("Assertion 4 failed: endpoints.size() != 3: " + endpoints.size());
 
         var routes = collectRoutes(endpoints);
 
-//        System.out.println(routes);
-        System.out.println("Factorial of: " + Factorial.fromInt(endpoints.size()));
-        System.out.println("Generated routes: " + routes.size());
+        int factorial = Factorial.fromInt(endpoints.size());
+        if(routes.size() != factorial) throw new AssertionError("Assertion 5 failed: routes.size() != "+factorial+": " + routes.size());
+
+
     }
 }
