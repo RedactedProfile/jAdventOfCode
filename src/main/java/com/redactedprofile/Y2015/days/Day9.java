@@ -1,6 +1,8 @@
 package com.redactedprofile.Y2015.days;
 
 import com.redactedprofile.AOCDay;
+import com.redactedprofile.Shared.Algorithms.Factorial;
+import com.redactedprofile.Shared.Algorithms.Heaps;
 
 import javax.swing.*;
 import java.util.*;
@@ -51,64 +53,21 @@ public class Day9 extends AOCDay {
         action.accept(tokenize(line));
     }
 
-    int calculateFactor(int input) {
-        int factor = input;
-        for(int i = input - 1; i > 0; i--) {
-            factor *= i;
-        }
-
-        return factor;
-    }
-
-    List<List<String>> generateRoutes(
-            List<String> endpoints
-    ) {
-        // implementation of Heap's Algorithm
-        List<List<String>> routes = new ArrayList<>();
-        String[] array = endpoints.toArray(new String[0]);
-        generateRoutes(array, array.length, routes);
-        return routes;
-    }
-
-    void generateRoutes(
-            String[] array,
-            int size,
-            List<List<String>> routes
-    ) {
-        if(size == 1) {
-            List<String> permutation = new ArrayList<>();
-            for(String s : array) {
-                permutation.add(s);
-            }
-            routes.add(permutation);
-            return;
-        }
-
-        for(int i = 0; i < size; i++) {
-            generateRoutes(array, size - 1, routes);
-            if(size % 2 == 1) {
-                swap(array, 0, size - 1);
-            } else {
-                swap(array, i, size - 1);
-            }
-        }
-    }
-
-    private void swap(String[] array, int i, int j) {
-        String temp = array[i];
-        array[i] = array[j];
-        array[j] = temp;
-    }
-
+    /**
+     * Generate all possible permutations of the endpoints
+     * @param endpoints
+     * @return
+     */
     List<List<String>> collectRoutes(Set<String> endpoints) {
-//        int factor = calculateFactor(endpoints.size());
-
         List<String> endpointList = endpoints.stream().toList();
-        List<List<String>> routes = generateRoutes(endpointList);
-
-        return routes;
+        return Heaps.generatePermutation(endpointList);
     }
 
+    /**
+     * Get a list of unique values
+     * @param navs
+     * @return
+     */
     Set<String> collectEndpoints(List<List<String>> navs) {
         Set<String> endpoints = new HashSet<>();
 
@@ -142,7 +101,7 @@ public class Day9 extends AOCDay {
         var routes = collectRoutes(endpoints);
 
 //        System.out.println(routes);
-        System.out.println("Factorial of: " + calculateFactor(endpoints.size()));
+        System.out.println("Factorial of: " + Factorial.fromInt(endpoints.size()));
         System.out.println("Generated routes: " + routes.size());
     }
 }
