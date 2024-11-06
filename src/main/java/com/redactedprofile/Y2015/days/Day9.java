@@ -60,71 +60,51 @@ public class Day9 extends AOCDay {
         return factor;
     }
 
-    boolean generateRoute(
-            ArrayList<ArrayList<String>> routes,            // global container for all generates routes
-            ArrayList<String> routeContainer,               // active route being built
-            ArrayList<String> endpoints)                          // all available endpoints
-    {
-        while(true) { // loop as many times as there are available slots while finding something unique
-            Collections.shuffle(endpoints);
-            ArrayList<String> shuffledEndpoints = new ArrayList<>(endpoints);
-            if(!routes.contains(shuffledEndpoints)) {
-                routes.add(shuffledEndpoints);
-                return true;
-            }
-        }
-
-
-        /**
-        int attempts = 0;
-        while(attempts < calculateFactor(endpoints.size())) { // loop as many times as there are available slots while finding something to build
-            routeContainer.clear();
-            while(routeContainer.size() < endpoints.size()) { // each loop we should be adding one endpoint until completion
-
-                // we have an empty slot to fill. Let's choose one at random
-
-                // first, randomize the array of endpoints
-                Collections.shuffle(endpoints);
-
-                // we're going to now go through the shuffled endpoints one by one until we find one that isn't already in the route container
-                for(String endpoint : endpoints) {
-                    if(!routeContainer.contains(endpoint)) {
-                        routeContainer.add(endpoint);
-                        break;
-                    }
-                }
-            }
-
-            if(!routes.contains(routeContainer)) { // if this is a fresh entry that doesn't already exist, break out
-                routes.add(routeContainer);
-                return true;
-            }
-            attempts++;
-        }
-
-
-        // we tried jim. Nothing was found.
-        return false; // let us loop again
-         */
+    List<List<String>> generateRoutes(
+            List<String> endpoints
+    ) {
+        // implementation of Heap's Algorithm
+        List<List<String>> routes = new ArrayList<>();
+        String[] array = endpoints.toArray(new String[0]);
+        generateRoutes(array, array.length, routes);
+        return routes;
     }
 
-    ArrayList<ArrayList<String>> collectRoutes(Set<String> endpoints) {
-        int factor = calculateFactor(endpoints.size());
+    void generateRoutes(
+            String[] array,
+            int size,
+            List<List<String>> routes
+    ) {
+        if(size == 1) {
+            List<String> permutation = new ArrayList<>();
+            for(String s : array) {
+                permutation.add(s);
+            }
+            routes.add(permutation);
+            return;
+        }
+
+        for(int i = 0; i < size; i++) {
+            generateRoutes(array, size - 1, routes);
+            if(size % 2 == 1) {
+                swap(array, 0, size - 1);
+            } else {
+                swap(array, i, size - 1);
+            }
+        }
+    }
+
+    private void swap(String[] array, int i, int j) {
+        String temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+
+    List<List<String>> collectRoutes(Set<String> endpoints) {
+//        int factor = calculateFactor(endpoints.size());
 
         List<String> endpointList = endpoints.stream().toList();
-        ArrayList<String> endpointArray = new ArrayList<>(endpointList);
-        ArrayList<ArrayList<String>> routes = new ArrayList<>(); // reserve this much memory so we don't need to resize the array around heap so much, which is costly
-
-        for (int i = 0; i < factor; i++) {
-
-            ArrayList<String> routeContainer = new ArrayList<>(endpointList.size());
-            while(!generateRoute(routes, routeContainer, endpointArray)) {
-                // the functions doing all the work
-
-            }
-
-//            System.out.println(routes);
-        }
+        List<List<String>> routes = generateRoutes(endpointList);
 
         return routes;
     }
@@ -160,5 +140,9 @@ public class Day9 extends AOCDay {
 //        if(endpoints.size() != 3) throw new AssertionError("Assertion 4 failed: endpoints.size() != 3: " + endpoints.size());
 
         var routes = collectRoutes(endpoints);
+
+//        System.out.println(routes);
+        System.out.println("Factorial of: " + calculateFactor(endpoints.size()));
+        System.out.println("Generated routes: " + routes.size());
     }
 }
