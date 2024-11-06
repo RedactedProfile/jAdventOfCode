@@ -20,7 +20,7 @@ public class Heaps {
             List<List<String>> routes
     ) {
         if(size == 1) {
-            List<String> permutation = new ArrayList<>();
+            List<String> permutation = new ArrayList<>(array.length);
             for(String s : array) {
                 permutation.add(s);
             }
