@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Heaps {
-    public static List<List<String>> generatePermutation(
-            List<String> endpoints
+    public static List<List<Object>> generatePermutation(
+            List<Object> objects
     ) {
         // implementation of Heap's Algorithm
-        List<List<String>> routes = new ArrayList<>();
-        String[] array = endpoints.toArray(new String[0]);
-        generatePermutation(array, array.length, routes);
-        return routes;
+        List<List<Object>> perms = new ArrayList<>();
+        Object[] array = objects.toArray(new Object[0]);
+        generatePermutation(array, array.length, perms);
+        return perms;
     }
 
     private static void generatePermutation(
-            String[] array,
+            Object[] array,
             int size,
-            List<List<String>> routes
+            List<List<Object>> objects
     ) {
         if(size == 1) {
-            List<String> permutation = new ArrayList<>(array.length);
-            for(String s : array) {
+            List<Object> permutation = new ArrayList<>(array.length);
+            for(Object s : array) {
                 permutation.add(s);
             }
-            routes.add(permutation);
+            objects.add(permutation);
             return;
         }
 
         for(int i = 0; i < size; i++) {
-            generatePermutation(array, size - 1, routes);
+            generatePermutation(array, size - 1, objects);
             if(size % 2 == 1) {
                 swap(array, 0, size - 1);
             } else {
@@ -38,8 +38,8 @@ public class Heaps {
         }
     }
 
-    private static void swap(String[] array, int i, int j) {
-        String temp = array[i];
+    private static void swap(Object[] array, int i, int j) {
+        Object temp = array[i];
         array[i] = array[j];
         array[j] = temp;
     }

@@ -59,8 +59,12 @@ public class Day9 extends AOCDay {
      * @return
      */
     List<List<String>> collectRoutes(Set<String> endpoints) {
-        List<String> endpointList = endpoints.stream().toList();
-        return Heaps.generatePermutation(endpointList);
+        List<List<Object>> routeObjects = Heaps.generatePermutation(Arrays.asList(endpoints.toArray()));
+        ArrayList<List<String>> routes = new ArrayList<>(routeObjects.size());
+        for (Object _route : routeObjects) {
+            routes.add((List<String>) _route);
+        }
+        return routes;
     }
 
     /**
