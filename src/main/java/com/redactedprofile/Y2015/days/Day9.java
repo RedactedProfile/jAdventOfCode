@@ -23,16 +23,56 @@ public class Day9 extends AOCDay {
         return "2015/09.txt";
     }
 
+    /**
+     * This puzzle is all about finding the shortest path between various locations
+     */
     @Override
     public void easy() {
+        // Collect navigation endpoints from input and create a distance map out of them
+        List<List<String>> navs = new ArrayList<>();
+        getInputLinesByLine(line -> tokenize(line, (navs::add)));
+        List<RouteDistance> routeDistanceMap = generateRouteDistanceMap(navs);
 
+        // Out of the distance maps we create a unique list of all possible endpoints
+        Set<String> endpoints = collectEndpoints(routeDistanceMap);
 
+        // So that we can generate all possible permutations of those endpoints into travel-able routes
+        List<List<String>> routes = collectRoutes(endpoints);
 
-        System.out.println("Final floor: ");
+        // With all the routes generated, and the map of distances between every two locations, we can now tally up each route
+        Map<List<String>, Integer> routeDistances = calculateRouteDistances(routes, routeDistanceMap);
+
+        // And then we can find the route with the smalled distance, which is what the puzzle calls for
+        RouteWithDistance shortestRoute = findShortestRoute(routeDistances);
+
+        System.out.println("The route with the shortest distance is " + shortestRoute.distance + " by navigating through " + shortestRoute.route);
     }
 
 
+    /**
+     * This puzzle is all about finding the longest path between various locations
+     */
+    @Override
+    public void hard() {
+        // Collect navigation endpoints from input and create a distance map out of them
+        List<List<String>> navs = new ArrayList<>();
+        getInputLinesByLine(line -> tokenize(line, (navs::add)));
+        List<RouteDistance> routeDistanceMap = generateRouteDistanceMap(navs);
 
+        // Out of the distance maps we create a unique list of all possible endpoints
+        Set<String> endpoints = collectEndpoints(routeDistanceMap);
+
+        // So that we can generate all possible permutations of those endpoints into travel-able routes
+        List<List<String>> routes = collectRoutes(endpoints);
+
+        // With all the routes generated, and the map of distances between every two locations, we can now tally up each route
+        Map<List<String>, Integer> routeDistances = calculateRouteDistances(routes, routeDistanceMap);
+
+        // And then we can find the route with the smalled distance, which is what the puzzle calls for
+        RouteWithDistance longestRoute = findLongestRoute(routeDistances);
+
+        System.out.println("The route with the longest distance is " + longestRoute.distance + " by navigating through " + longestRoute.route);
+    }
 
 
     Pattern instructionPattern = Pattern.compile(
@@ -110,21 +150,39 @@ public class Day9 extends AOCDay {
         return distance;
     }
 
-    private ArrayList<Integer> calculateRouteDistances(List<List<String>> routes, List<RouteDistance> routeDistanceMap) {
-        ArrayList<Integer> routeDistances = new ArrayList<>(routes.size());
+    private Map<List<String>, Integer> calculateRouteDistances(List<List<String>> routes, List<RouteDistance> routeDistanceMap) {
+        Map<List<String>, Integer> routeDistances = new HashMap<>(routes.size());
 
         for(List<String> route : routes) {
-            routeDistances.add(calculateRouteDistance(route, routeDistanceMap));
+            routeDistances.put(route, calculateRouteDistance(route, routeDistanceMap));
         }
 
         return routeDistances;
     }
 
-//    private Map<String, Integer> findShortestRoute(List<List<String>> routes, List<Integer> routeDistances) {
-//        // I could easily just quicksort the routeDistances and return the integer, but that doesn't tell me WHICH calculated route is the shorted
-//        // I want to expose, even just for myself, what that route was as well
-//        // So I can either quickly create a hashmap construct that binds these two arrays together,
-//    }
+    private record RouteWithDistance(String route, int distance) {}
+    private RouteWithDistance findExtremeRoute(Map<List<String>, Integer> routes, boolean reverse) {
+        RouteWithDistance shortestRoute = new RouteWithDistance(null, 0);
+
+        // Going to try this PriorityQueue thing, no idea how good it is
+        PriorityQueue<Map.Entry<List<String>, Integer>> pq =
+                !reverse ? new PriorityQueue<>(routes.size(), Map.Entry.comparingByValue()) :
+                           new PriorityQueue<>(routes.size(), Collections.reverseOrder(Map.Entry.comparingByValue()));
+
+        pq.addAll(routes.entrySet()); // By adding all the elements here, it runs an internal comparison set here ^^^^
+        Map.Entry<List<String>, Integer> entry = pq.poll();  // Polling takes, in this instance, the smallest -value-. We should while over it polling for each entry.
+        shortestRoute = new RouteWithDistance(entry.getKey().toString(), entry.getValue());
+
+        return shortestRoute;
+    }
+
+    private RouteWithDistance findShortestRoute(Map<List<String>, Integer> routes) {
+        return findExtremeRoute(routes, false);
+    }
+
+    private RouteWithDistance findLongestRoute(Map<List<String>, Integer> routes) {
+        return findExtremeRoute(routes, true);
+    }
 
 
     @Override
@@ -152,10 +210,14 @@ public class Day9 extends AOCDay {
         int factorial = Factorial.fromInt(endpoints.size());
         if(routes.size() != factorial) throw new AssertionError("Assertion 5 failed: routes.size() != "+factorial+": " + routes.size());
 
-        List<Integer> routeDistances = calculateRouteDistances(routes, routeDistanceMap);
+        Map<List<String>, Integer> routeDistances = calculateRouteDistances(routes, routeDistanceMap);
         if(routeDistances.size() != 6) throw new AssertionError("Assertion 6 failed: routeDistances.size() != 6: " + routeDistances.size());
 
+        RouteWithDistance shortestRoute = findShortestRoute(routeDistances);
+        if(shortestRoute.distance != 605) throw new AssertionError("Assertion 7 failed: shortestRoute.distance != 605: " + shortestRoute.distance);
 
+        RouteWithDistance longestRoute = findLongestRoute(routeDistances);
+        if(longestRoute.distance != 982) throw new AssertionError("Assertion 8 failed: longestRoute.distance != 982: " + longestRoute.distance);
     }
 
 
