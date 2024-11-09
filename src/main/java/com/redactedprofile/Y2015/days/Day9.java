@@ -3,12 +3,17 @@ package com.redactedprofile.Y2015.days;
 import com.redactedprofile.AOCDay;
 import com.redactedprofile.Shared.Algorithms.Factorial;
 import com.redactedprofile.Shared.Algorithms.Heaps;
+import org.openjdk.jmh.annotations.*;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MILLISECONDS)
+@State(Scope.Thread)
 public class Day9 extends AOCDay {
 
     private static final int NAV_FROM = 0;
@@ -185,6 +190,7 @@ public class Day9 extends AOCDay {
     }
 
 
+    @Benchmark
     @Override
     public void assertTests() {
         String strLoc1 = "London to Dublin = 464",
