@@ -115,7 +115,7 @@ public class Day7 extends AOCDay {
              hand4 = new Hand(tokened4),
              hand5 = new Hand(tokened5);
 
-        assert hand1.cards.length == 5 && hand2.cards.length == 5 && hand3.cards.length == 5;
+        assert hand1.cards.length == 5 && hand2.cards.length == 5 && hand3.cards.length == 5 && hand4.cards.length == 5 && hand5.cards.length == 5;
         assert hand1.cards[0].equals("3");
 
         System.out.println(hand1.bet);
