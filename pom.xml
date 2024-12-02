@@ -32,6 +32,32 @@
             <version>1.37</version>
             <scope>provided</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hexworks.zircon/zircon.core -->
+        <dependency>
+            <groupId>org.hexworks.zircon</groupId>
+            <artifactId>zircon.core</artifactId>
+            <version>2024.1.0-ALPHA</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.hexworks.zircon/zircon.core-jvm -->
+        <dependency>
+            <groupId>org.hexworks.zircon</groupId>
+            <artifactId>zircon.core-jvm</artifactId>
+            <version>2024.1.0-ALPHA</version>
+        </dependency>
+        <!-- use zircon.jvm.libgdx if you want to use LibGDX instead of Swing -->
+        <dependency>
+            <groupId>org.hexworks.zircon</groupId>
+            <artifactId>zircon.jvm.swing</artifactId>
+            <version>2021.1.0-RELEASE</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.26.3</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
