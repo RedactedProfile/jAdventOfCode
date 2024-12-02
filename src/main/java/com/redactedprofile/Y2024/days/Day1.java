@@ -8,25 +8,68 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+
+
 public class Day1 extends AOCDay {
+    static int InitialCapacity = 2000;
+
     @Override
     public String getPuzzleInputFilePath() {
         return "2024/01.txt";
     }
 
+    /**
+     * For part 1, we're just taking two lists of integers, sorting them both smallest to largest, and adding up the difference between each pair
+     */
     @Override
     public void easy() {
-        ArrayList<int[]> tokens = new ArrayList<>(2000); // a number I plucked out of nowhere to give a fighting chance to not needing to re-allocate memory a bunch of times
+        ArrayList<int[]> tokens = new ArrayList<>(InitialCapacity); // a number I plucked out of nowhere to give a fighting chance to not needing to re-allocate memory a bunch of times
         getInputLinesByLine(line -> tokens.add(tokenize(line)));
         var container = createContainer(tokens.size());
         for(int i = 0; i < tokens.size(); i++) {
             addPairToContainer(tokens.get(i), container);
         }
+
+        // Sort the arrays smallest to largest
         sortContainerLists(container);
 
+        // Runs through the container and evaluates the unsigned distance between each colum pair and provides a sum
         var score = evaluateDistances(container);
 
+        // Pack it in boys, we're heading home.
         System.out.println("The total distance is " + score);
+
+        //////////
+        //// Last run on Ryzen 5600X was 13.14ms
+        //////////
+    }
+
+    /**
+     * For part 2, we're less concerned with pairs, and more concerned about walking the left array, to find
+     * duplicates in the right list, creating a multiplier by a factor of discovered dupes to create a "similarity" score
+     */
+    @Override
+    public void hard() {
+        ArrayList<int[]> tokens = new ArrayList<>(InitialCapacity); // a number I plucked out of nowhere to give a fighting chance to not needing to re-allocate memory a bunch of times
+        getInputLinesByLine(line -> tokens.add(tokenize(line)));
+        var container = createContainer(tokens.size());
+        for(int i = 0; i < tokens.size(); i++) {
+            addPairToContainer(tokens.get(i), container);
+        }
+
+        int score = 0;
+        // Now we can go through the list and find duplicates
+        for(int i = 0; i < tokens.size(); i++) {
+            score += container.getFirst().get(i) * findDuplicates( container.getFirst().get(i), container.getLast(), false);
+        }
+
+        System.out.println("The total similarity score is " + score);
+
+        //////////
+        //// Last run on Ryzen 5600X was
+        ////        with streams: 16.79ms
+        ////     without streams: 14.29ms
+        //////////
     }
 
     Pattern instructionPattern = Pattern.compile("\\d+");
@@ -77,6 +120,21 @@ public class Day1 extends AOCDay {
         return out;
     }
 
+    private int findDuplicates(int needle, ArrayList<Integer> haystack, boolean withStream) {
+        int out = 0;
+
+        if(withStream) {
+            out = (int) haystack.stream().filter(i -> i == needle).count();
+        } else {
+            for(int i = 0; i < haystack.size(); i++) {
+                if(haystack.get(i) == needle) {
+                    out++;
+                }
+            }
+        }
+
+        return out;
+    }
 
 
     @Override
@@ -120,6 +178,10 @@ public class Day1 extends AOCDay {
         int score = evaluateDistances(container);
 
         assert score == 11;
+
+        int dupes = findDuplicates(3, container.getLast(), true);
+
+        assert dupes == 3;
     }
 
 
