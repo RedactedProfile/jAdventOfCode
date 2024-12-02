@@ -14,6 +14,21 @@ public class Day1 extends AOCDay {
         return "2024/01.txt";
     }
 
+    @Override
+    public void easy() {
+        ArrayList<int[]> tokens = new ArrayList<>(100);
+        getInputLinesByLine(line -> tokens.add(tokenize(line)));
+        var container = createContainer(tokens.size());
+        for(int i = 0; i < tokens.size(); i++) {
+            addPairToContainer(tokens.get(i), container);
+        }
+        sortContainerLists(container);
+
+        var score = evaluateDistances(container);
+
+        System.out.println("The total distance is " + score);
+    }
+
     Pattern instructionPattern = Pattern.compile("\\d+");
     private int[] tokenize(String line) {
         Matcher matcher = instructionPattern.matcher(line);
