@@ -16,7 +16,7 @@ public class Day1 extends AOCDay {
 
     @Override
     public void easy() {
-        ArrayList<int[]> tokens = new ArrayList<>(100);
+        ArrayList<int[]> tokens = new ArrayList<>(2000); // a number I plucked out of nowhere to give a fighting chance to not needing to re-allocate memory a bunch of times
         getInputLinesByLine(line -> tokens.add(tokenize(line)));
         var container = createContainer(tokens.size());
         for(int i = 0; i < tokens.size(); i++) {
