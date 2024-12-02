@@ -22,7 +22,8 @@ public class Registry {
 
             )),
             Map.entry("2024", Map.ofEntries(
-                    Map.entry("1", com.redactedprofile.Y2024.days.Day1.class)
+                    Map.entry("1", com.redactedprofile.Y2024.days.Day1.class),
+                    Map.entry("2", com.redactedprofile.Y2024.days.Day2.class)
             ))
     );
 }
